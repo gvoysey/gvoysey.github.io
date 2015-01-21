@@ -1,3 +1,33 @@
-name: Your New Jekyll Site
-markdown: redcarpet
-pygments: true
+# Dependencies
+markdown:         redcarpet
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+relative_permalinks: true
+
+# Setup
+title:            Graham Voysey
+#tagline:          ''
+description:      'M.S. Candidate & <br/> Research Engineer <br/> Hearing Research Center <br/> Boston Univeristy'
+url:              http://gvoysey.github.io
+baseurl:          /
+
+author:
+  name:           'Graham Voysey'
+  url:            https://www.bu.edu/hrc/research/laboratories/auditory-biophysics/
+  email:          gvoysey@bu.edu
+
+paginate:         10
+
+# Custom vars
+version:          2.1
+
+github:
+  repo:           https://github.com/gvoysey
+
+google:
+  scholar:        http://scholar.google.com/citations?user=mBTc5jgAAAAJ&hl
+
+linkedin:
+  url:
