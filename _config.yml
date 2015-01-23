@@ -9,7 +9,7 @@ relative_permalinks: true
 # Setup
 title:            Graham Voysey
 #tagline:          ''
-description:      'M.S. Candidate & <br/> Research Engineer <br/> Hearing Research Center <br/> Boston Univeristy'
+description:      'M.S. Candidate & <br/> Research Engineer <br/>  <br/> Hearing Research Center <br/> Boston Univeristy'
 url:              http://gvoysey.github.io
 baseurl:          /
 
