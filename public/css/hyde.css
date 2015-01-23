@@ -68,7 +68,9 @@ html {
     width: 18rem;
     text-align: left;
   }
-  .sidebar-about img{
+}
+@media (min-width: 48em) {
+  .sidebar-about img {
       margin: 0px auto
       display: block
   }
