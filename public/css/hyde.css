@@ -69,13 +69,16 @@ html {
     text-align: left;
   }
 }
-.sidebar-about img{
-  display: inline;
+
+
+.sidebar-about img {
+  margin: 0px auto;
+  display: block;
 }
+
 @media (min-width: 48em) {
-  .sidebar-about img {
-      margin: 0px auto;
-      display: block;
+  .sidebar-about img{
+    display: inline;
   }
 }
 
