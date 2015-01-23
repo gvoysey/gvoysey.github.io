@@ -70,7 +70,7 @@ html {
   }
 }
 .sidebar-about img{
-  text-align: left;
+  display: inline;
 }
 @media (min-width: 48em) {
   .sidebar-about img {
