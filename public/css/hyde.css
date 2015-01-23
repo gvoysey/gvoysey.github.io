@@ -68,6 +68,10 @@ html {
     width: 18rem;
     text-align: left;
   }
+  .sidebar-about img{
+      margin: 0px auto
+      display: block
+  }
 }
 
 /* Sidebar links */

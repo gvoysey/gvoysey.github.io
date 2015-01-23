@@ -63,13 +63,6 @@ a:visited { color: #a0a; }
   line-height: 1.5em;
 }
 
-@media (min-width: 48em){
-  .sidebar-about img{
-    margin: 0px auto
-    display: block
-  }
-}
-
 .header a {
   font-weight: bold;
   text-decoration: none;
