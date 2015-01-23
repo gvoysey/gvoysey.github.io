@@ -71,8 +71,8 @@ html {
 }
 @media (min-width: 48em) {
   .sidebar-about img {
-      margin: 0px auto
-      display: block
+      margin: 0px auto;
+      display: block;
   }
 }
 
