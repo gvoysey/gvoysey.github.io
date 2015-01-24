@@ -3,7 +3,7 @@ layout: post
 title: Publications
 ---
 ### In Press
-1.  Cler, M., **Voysey G.E.**, and Stepp, C. **(2014)** "Video game speech rehabilitation for velopharyngeal dysfunction: Feasibility and pilot testing,", IEEE EMBS NER'15, Montpellier France
+1.  Cler, M., **Voysey G.E.**, and Stepp, C. **(2014)** "Video game speech rehabilitation for velopharyngeal dysfunction: Feasibility and pilot testing," IEEE EMBS NER'15, Montpellier France
 
 ### Peer-Reviewed Publications
 1.  Lee, K., Lv, W., Ter-ovanesyan, E., Barley, M. E., **Voysey, G. E.**, Galea, A. M., Hirschman, G. B., et al. **(2013)**. “Cardiac Ablation Catheter Guidance by Means of a Single Equivalent Moving Dipole Inverse Algorithm,” Pacing Clin. Electrophysiol., **00**, 1–12. doi: [10.1111/pace.12114](http://dx.doi.org/10.1111/pace.12114)
