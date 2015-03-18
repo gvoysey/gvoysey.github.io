@@ -12,6 +12,7 @@ title:            Graham Voysey
 description:      'M.S. Candidate & <br/> Research Engineer <br/>  <br/> Hearing Research Center <br/> Boston Univeristy'
 url:              http://gvoysey.github.io
 baseurl:          /
+include: .htaccess
 
 author:
   name:           'Graham Voysey'
