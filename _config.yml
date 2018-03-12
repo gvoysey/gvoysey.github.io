@@ -7,11 +7,11 @@ permalink:        pretty
 
 # Setup
 title:            Graham Voysey
-#tagline:          ''
+#tagline:         ''
 description:      'Research Engineer<br/> Hearing Research Center <br/> Boston Univeristy'
 url:              http://gvoysey.github.io
 baseurl:          /
-include: .htaccess
+include:          [.htaccess]
 
 author:
   name:           'Graham Voysey'
@@ -31,7 +31,7 @@ google:
 
 linkedin:
   url:
-  
+
 mendeley :        http://www.mendeley.com/profiles/graham-voysey/
 
 researchgate : https://www.researchgate.net/profile/Graham_Voysey
