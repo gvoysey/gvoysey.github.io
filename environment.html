@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-06-06 Wed 18:21 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Configuring a Python Environment:</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Graham Voysey" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Configuring a Python Environment:
+<br />
+<span class="subtitle">Minimal pain, maximal gain.</span>
+</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgfdd636e">1. Introduction</a>
+<ul>
+<li><a href="#org95a72fe">1.1. Do not ever use <code>sudo pip</code></a></li>
+<li><a href="#org1989e75">1.2. Strongly consider <code>export PIP_REQUIRE_VIRTUALENV=true</code></a></li>
+</ul>
+</li>
+<li><a href="#orgeebe22c">2. System Python is best avoided.</a>
+<ul>
+<li><a href="#org0948ad1">2.1. Linux</a></li>
+<li><a href="#org08ca04f">2.2. macOS</a></li>
+<li><a href="#orga5c0cfb">2.3. Windows</a></li>
+<li><a href="#org362819e">2.4. General thoughts</a></li>
+</ul>
+</li>
+<li><a href="#org285225c">3. Pyenv</a>
+<ul>
+<li><a href="#orgf7d20eb">3.1. Installing Pyenv</a>
+<ul>
+<li><a href="#org27f8eea">3.1.1. Uninstalling pyenv</a></li>
+</ul>
+</li>
+<li><a href="#org8e17f54">3.2. Install prerequisite libraries for building python.</a></li>
+<li><a href="#org08065b0">3.3. Installing a python version</a></li>
+<li><a href="#orgc69a69f">3.4. Uninstalling a python version</a></li>
+<li><a href="#orgb912a3f">3.5. Select one or more python interpreters</a>
+<ul>
+<li><a href="#org915d58a">3.5.1. Global</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgfdd636e" class="outline-2">
+<h2 id="orgfdd636e"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Fairly often, I&rsquo;ve observed users of many operating systems become frustrated and
+angry at the often confusing ways to configure python for their operating system.
+This has happened to me, too. Quite a lot, actually.
+</p>
+
+<p>
+There is an <a href="https://xkcd.com/1987/">obligatory XKCD</a> for this problem.
+</p>
+
+<p>
+As a result, I&rsquo;ve prepared this guide, which reflects my current advice for best
+practices for configuring sane, <span class="underline">stable</span>, and clean python installations and virtual
+environments on linux and macOS.  Windows lags behind, but I&rsquo;ll address it near the
+end.
+</p>
+
+<p>
+My focus here is on configuring your local environment for developing python
+packages.  Following <a href="http://docs.python-guide.org/en/latest/shipping/freezing/#freezing-your-code-ref">other guides</a>, applications that should be shipped to end users
+should involve none of this at all.  Ideally, your users shouldn&rsquo;t ever even know
+you&rsquo;re using python, and should have no need to know what <code>pip</code> is.
+</p>
+
+<p>
+Shipping libraries and packages to other developers <i>will</i> involve pip; see <a href="http://docs.python-guide.org/en/latest/shipping/packaging/#packaging-your-code-ref">this</a> for
+some reading on the subject.
+</p>
+
+<p>
+<b>TL;DR: To set up a sane development environment, eschew system python; ignore package
+managers; use pyenv and pipenv to create isolated and tidy development environments</b>.
+</p>
+</div>
+
+<div id="outline-container-org95a72fe" class="outline-3">
+<h3 id="org95a72fe"><span class="section-number-3">1.1</span> Do not ever use <code>sudo pip</code></h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Before going further, it&rsquo;s important to note that there are some things that are
+<b>never</b> a good idea, and this is very much one one of them.
+</p>
+
+<p>
+<b>Do not ever</b> type the command <code>sudo pip install &lt;somepackage&gt;</code>.  This is guaranteed to
+cause no end of havoc, because you are introducing two conflicting authorities over
+python packages in your OS-level python <code>site-packages</code> directory: <a href="https://pypi.org">pypi</a>, and your
+distribution&rsquo;s package manager.
+</p>
+
+<p>
+These two sources of truth are hardly ever in sync. Things break in really weird
+ways, and undoing this is a giant pain.  It&rsquo;s fairly rare, but in the worst case,
+you&rsquo;ll wind up with package conflicts in system python so unresolvable that
+reinstalling your OS is the best solution! This is especially an issue on RPM based
+systems, because <code>yum</code> and <code>dnf</code> are written in python, but it&rsquo;s true for other systems
+as well.
+</p>
+
+<p>
+In my observation of the <code>#python</code> IRC channel, about 10 times a week someone joins the
+channel and they&rsquo;re very frustrated because nothing works, packages are broken,
+imports fail with semi-mystical <code>ModuleNotFound</code> errors, and so on.  The root problem
+is <span class="underline">always</span> of the form &ldquo;Well, I tried to <code>pip install foo</code> and it didn&rsquo;t work, so I <code>sudo
+pip ...</code>, help!&rdquo;
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1989e75" class="outline-3">
+<h3 id="org1989e75"><span class="section-number-3">1.2</span> Strongly consider <code>export PIP_REQUIRE_VIRTUALENV=true</code></h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Did you know that <code>pip</code> can be configured to only work in virtualenvs?  It can!  The
+environment variable <code>PIP_REQUIRE_VIRTUALENV</code> has been around for a while, and it&rsquo;s a
+good idea.
+</p>
+
+<p>
+If you find that you still want to use <code>pip install --user</code> to install packages, that&rsquo;s
+okay-ish, but I <span class="underline">strongly</span> urge you to set this environment variable for your root user.
+Then <code>sudo pip install</code> will cease to work at all, which is great news.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgeebe22c" class="outline-2">
+<h2 id="orgeebe22c"><span class="section-number-2">2</span> System Python is best avoided.</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org0948ad1" class="outline-3">
+<h3 id="org0948ad1"><span class="section-number-3">2.1</span> Linux</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+With the exception of specialty linux distributions like <a href="http://distro.ibiblio.org/tinycorelinux/">tinycore</a> or <a href="https://alpinelinux.org/">alpine linux</a>, a
+version of python is installed by default in linux.  It&rsquo;s normally a slightly old
+version of Python 2.7, it&rsquo;s normally an important part of the overall OS, it&rsquo;s
+normally used to run daemons and other system services.  Some distros, like modern
+flavors of Ubuntu, also ship with a version of python3 as well; this is also normally
+older.  For now, python3 is less important to the overall health of your OS, but this
+is changing.  <a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/7.5_release_notes/chap-red_hat_enterprise_linux-7.5_release_notes-deprecated_functionality">RHEL is going python3</a>, ArchLinux already is, and others are beginning
+to follow suit.
+</p>
+
+<p>
+Legacy systems, or older releases of slow-moving distributions like CentOS and
+Debian, may still ship Python 2.6 as the system python. This has not received a
+security patch since 2013 and is now so deprecated that you generally can&rsquo;t use it
+for web related programming because it cannot handle modern TLS.
+</p>
+
+<p>
+In my experience, this situation arises fairly often for users of large grid
+computers or high performance computing clusters.  In these situations, installing
+your own python into <code>$HOME</code> is basically the only solution&#x2014;as I get into below, I
+think this is the right answer more generally anyway.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org08ca04f" class="outline-3">
+<h3 id="org08ca04f"><span class="section-number-3">2.2</span> macOS</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+On macOS, a version of 2.7 is shipped as the &ldquo;framework&rdquo; python in
+<code>/System/Library/Frameworks/</code> and symlinked to <code>/usr/bin</code>.  <a href="https://stackoverflow.com/questions/1444543/differences-between-framework-and-non-framework-builds-of-python-on-mac-os-x">Frameworks</a> are strange and
+best avoided&#x2014;and even if that was not the case, the most modern version of macOS
+ships with 2.7.10, which is 4 revs out of date.  A major issue with system python on
+macOS is how it handles SSL&#x2014;the default is to support TLS&lt;1.2, which is a gaping
+security hole.
+</p>
+</div>
+</div>
+<div id="outline-container-orga5c0cfb" class="outline-3">
+<h3 id="orga5c0cfb"><span class="section-number-3">2.3</span> Windows</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Windows doesn&rsquo;t have a system python.  For the purposes of setting up a development
+environment on a given system, this is probably a feature.
+</p>
+</div>
+</div>
+<div id="outline-container-org362819e" class="outline-3">
+<h3 id="org362819e"><span class="section-number-3">2.4</span> General thoughts</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+OS aside, there are good reasons to avoid using system python, particularly for
+scientific computing.
+</p>
+
+<dl class="org-dl">
+<dt>There are no advantages, only downsides to using the system python.</dt><dd></dd>
+</dl>
+<p>
+It doesn&rsquo;t provide any functionality that is special, yet it remains the python which
+gets called by the OS for system tasks.  These are required processes that are best
+left alone.  It&rsquo;s best to consign your system python to performing <i>only</i> those tasks.
+</p>
+
+<dl class="org-dl">
+<dt>System Python is virtually guaranteed to be out of date.</dt><dd></dd>
+</dl>
+<p>
+Because it&rsquo;s provided by a second or third (or fourth) party vendor, there&rsquo;s a
+disconnect between the shipping schedule of python.org and pypi and the various
+package manager repos. There are very nice features in new versions of python that
+you will want to use that an outdated python can&rsquo;t give you, and there are security
+updates that you&rsquo;ll always want.
+</p>
+
+<dl class="org-dl">
+<dt>Package managers are the only way to install &ldquo;global&rdquo; packages into system python.</dt><dd></dd>
+</dl>
+<p>
+Assuming your OS even has one, that is. MacOS does not have one, though third party
+package managers like homebrew make life much better. Still, brew lags pypi and
+python.org for releases: Python 3.6 was only recently added, but has been available
+on python.org since December 2016. On Linux, distribution package managers are
+sometimes flatly wrong about package names, and usually provide packages which are
+out of date as well, especially for fast-moving libraries.
+</p>
+
+<p>
+And, since using system packages means you&rsquo;re stuck with the exact version provided
+by the OS, upgrading the OS means upgrading those libraries, which may require
+changes to your code.  It&rsquo;s not terribly uncommon to <code>apt install dist-upgrade</code> and
+then discover that you now have a bunch of refactoring to do.
+</p>
+
+<dl class="org-dl">
+<dt>System python is Python2 for the forseeable future.</dt><dd></dd>
+</dl>
+<p>
+For legacy support reasons, primarily, Python 3 is not going to be the default python
+for a long time. By default, <code>python</code> should resolve to <code>python2</code> (see <a href="https://www.python.org/dev/peps/pep-0394/">PEP 394</a>). However,
+Python 2 is going to EOL in <a href="https://pythonclock.org/">one year and seven months</a>, and there&rsquo;s no reason to start
+a new project in python2.
+</p>
+
+<p>
+Therefore, it will generally always be the case that you&rsquo;ll want a modern python3 on
+whatever operating system you&rsquo;re using.
+</p>
+
+<dl class="org-dl">
+<dt>You cannot rely on the OS for multi-python testing.</dt><dd></dd>
+</dl>
+<p>
+If you&rsquo;re interested in testing your code on many versions of python at the same
+time, you cannot rely on OS&#x2014;and version-specific Pythons as reliable tests.  Just
+because your tests pass on a mac running python 3.6 does not mean they&rsquo;ll pass on an
+ubuntu box running 3.4; Python 2.6 and 2.7 have breaking API changes between them on
+all OSes, so ideally you&rsquo;d have a test suite that runs your code on every python
+version you care about supporting.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org285225c" class="outline-2">
+<h2 id="org285225c"><span class="section-number-2">3</span> Pyenv</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Pyenv is a macOS and Linux project that solves all of the issues with system python
+which are outlined above.
+</p>
+
+<p>
+It does this by <i>ignoring system python, completely</i>.  <code>Pyenv</code> makes it reasonably hard to
+accidentally use system python as a normal user account, and gives you the ability to
+install and quickly switch between as many versions of python as you might care to
+use.  As of 2018, 228 versions of Python are available.  On any given day, I have
+about 5 installed on my workstation.
+</p>
+
+<p>
+From the <a href="https://github.com/pyenv/pyenv">project home page</a>,
+</p>
+<blockquote>
+<p>
+pyenv lets you easily switch between multiple versions of Python. It&rsquo;s simple,
+unobtrusive, and follows the UNIX tradition of single-purpose tools that do one thing
+well.
+</p>
+
+<p>
+pyenv does&#x2026;
+</p>
+
+<ul class="org-ul">
+<li>Let you change the global Python version on a per-user basis.</li>
+<li>Provide support for per-project Python versions.</li>
+<li>Allow you to override the Python version with an environment variable.</li>
+<li>Search commands from multiple versions of Python at a time. This may be helpful to test across Python versions with tox.</li>
+</ul>
+
+<p>
+In contrast with pythonbrew and pythonz, pyenv does not&#x2026;
+</p>
+
+<ul class="org-ul">
+<li>Depend on Python itself. pyenv was made from pure shell scripts. There is no
+bootstrap problem of Python.</li>
+<li>Need to be loaded into your shell. Instead, pyenv&rsquo;s shim approach works by adding a
+directory to your $PATH.</li>
+</ul>
+</blockquote>
+</div>
+
+<div id="outline-container-orgf7d20eb" class="outline-3">
+<h3 id="orgf7d20eb"><span class="section-number-3">3.1</span> Installing Pyenv</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+The easiest and best way to install pyenv is to use the <code>pyenv-installer</code> project,
+which is on github: <a href="https://github.com/pyenv/pyenv-installer">https://github.com/pyenv/pyenv-installer</a>.  This will install
+pyenv itself in your user home directory.  You can also <code>brew install pyenv</code> on macOS,
+if you prefer, which installs pyenv to <code>/usr/local/</code>.
+</p>
+
+<p>
+To install, run this command:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
+</pre>
+</div>
+
+<p>
+When complete, follow the instructions about adding the following lines to your shell
+<code>rc</code> file (<code>.bashrc</code>, <code>.bash_profile</code>, <code>.zshrc</code>, etc.):
+</p>
+<div class="org-src-container">
+<pre class="src src-bash"><span style="color: #BF93C3;">export</span> <span style="color: #F28B86;">PATH</span>=<span style="color: #86B187;">"~/.pyenv/bin:$PATH"</span>
+<span style="color: #BF93C3;">eval</span> <span style="color: #86B187;">"$(pyenv init -)"</span>
+<span style="color: #BF93C3;">eval</span> <span style="color: #86B187;">"$(pyenv virtualenv-init -)"</span>
+</pre>
+</div>
+<p>
+Then start a new shell session.  You can test to see if the install has been done
+correctly by issuing the command
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">pyenv versions
+</pre>
+</div>
+<p>
+and the output should simply be
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">*  system
+</pre>
+</div>
+<p>
+which means that you have one python version installed, and it&rsquo;s the system python.
+</p>
+</div>
+<div id="outline-container-org27f8eea" class="outline-4">
+<h4 id="org27f8eea"><span class="section-number-4">3.1.1</span> Uninstalling pyenv</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+In case you don&rsquo;t like pyenv, uninstallation is trivial.
+</p>
+<ul class="org-ul">
+<li>Remove the three lines above from your shell <code>rc</code> file</li>
+<li><code>rm -rf $HOME/.pyenv</code></li>
+<li>Restart your shell.</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8e17f54" class="outline-3">
+<h3 id="org8e17f54"><span class="section-number-3">3.2</span> Install prerequisite libraries for building python.</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+By default, pyenv compiles versions of python from source for you.  Some binaries are
+available (primarily for <code>anaconda</code> and <code>miniconda</code>), but in general <code>pyenv</code> downloads a
+source tarball and proceeds from there.
+</p>
+
+<p>
+You&rsquo;ll need to have some additional libraries installed in order for this to work.
+Normally, these are:
+</p>
+<ul class="org-ul">
+<li>bzip2 headers</li>
+<li>sqlite3 headers</li>
+<li>openssl headers</li>
+<li>readline6 headers</li>
+</ul>
+
+<p>
+and some others.
+</p>
+
+<p>
+Pyenv itself maintains a nice <a href="https://github.com/pyenv/pyenv/wiki/Common-build-problems">wiki</a> with solutions to resolve common build dependency
+issues.  On ubuntu,
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">sudo apt-get update &amp;&amp; <span style="color: #86B187;">\</span>
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev <span style="color: #86B187;">\</span>
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev <span style="color: #86B187;">\</span>
+xz-utils tk-dev
+</pre>
+</div>
+
+<p>
+should do it.  Homebrew provides similar packages under slightly different names.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org08065b0" class="outline-3">
+<h3 id="org08065b0"><span class="section-number-3">3.3</span> Installing a python version</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+With headers installed, compilation is straightforward and managed entirely by pyenv.
+</p>
+
+<p>
+To see the list of python versions, use
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">pyenv install --list
+</pre>
+</div>
+<p>
+and scroll through the results.
+</p>
+
+<p>
+Then to install, say, python 3.6.5, simply issue the command
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">pyenv install 3.6.5
+</pre>
+</div>
+<p>
+and wait for the compilation to complete.
+</p>
+
+<p>
+By default, installed interpreters are installed in
+<code>$PYENV_ROOT/versions/&lt;version_string&gt;</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc69a69f" class="outline-3">
+<h3 id="orgc69a69f"><span class="section-number-3">3.4</span> Uninstalling a python version</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Uninstallation is pretty trivial:
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">pyenv uninstall 3.6.5
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb912a3f" class="outline-3">
+<h3 id="orgb912a3f"><span class="section-number-3">3.5</span> Select one or more python interpreters</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+Just because pyenv has installed one or more python interpreters does not mean that
+these versions are all visible from a command prompt.
+</p>
+
+<p>
+At any time, you can run
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">pyenv version
+</pre>
+</div>
+<p>
+to see which python version the <span class="underline">current</span> shell session is using.
+</p>
+
+<p>
+To see all versions installed, run
+</p>
+<div class="org-src-container">
+<pre class="src src-bash">pyenv versions
+</pre>
+</div>
+<p>
+The current active version will be flagged with a <code>*</code> and a comment next to it will
+tell you why it&rsquo;s the active version.
+</p>
+
+<p>
+<code>pyenv</code> can maintain global, per-project, and per-shell-session mappings to specific
+installed python interpreters.
+</p>
+</div>
+<div id="outline-container-org915d58a" class="outline-4">
+<h4 id="org915d58a"><span class="section-number-4">3.5.1</span> Global</h4>
+<div class="outline-text-4" id="text-3-5-1">
+<p>
+To set a 
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Graham Voysey</p>
+<p class="date">Created: 2018-06-06 Wed 18:21</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
