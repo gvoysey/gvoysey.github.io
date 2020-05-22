@@ -4,7 +4,7 @@ title: Publications
 ---
 
 #### Peer-Reviewed Publications
-
+1. **Voysey, G. E.**, Zosuls, A., & Ketten, D. R. **(2019)**. "Aligning Basilar Membrane Spirals to Two-Dimensional Images of Point-Stiffness Experiments." Aquatic Mammals, 45(6), 733–738. doi: [10.1578/AM.45.6.2019.733)](https://doi.org/10.1578/AM.45.6.2019.733)
 1. Lee, K., Lv, W., Ter-ovanesyan, E., Barley, M. E., **Voysey, G. E.**, Galea, A. M., Hirschman, G. B., et al. **(2013)**. "Cardiac Ablation Catheter Guidance by Means of a Single Equivalent Moving Dipole Inverse Algorithm," Pacing Clin. Electrophysiol., **00**, 1–12\. doi: [10.1111/pace.12114](http://dx.doi.org/10.1111/pace.12114)
 
 #### Conference Proceedings
